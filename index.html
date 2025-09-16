@@ -5,6 +5,84 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Tulip — Your Favorite Online Persona & YouTuber</title>
 <link rel="stylesheet" href="styles.css">
+<style>
+  body {
+    font-family: "Poppins", sans-serif;
+    background-color: #fff9fb;
+    color: #333;
+    margin: 0;
+    padding: 0;
+  }
+  section {
+    padding: 60px 20px;
+  }
+  .hero {
+    text-align: center;
+    background: linear-gradient(135deg, #ffc6d9, #ffe9f2);
+    padding: 80px 20px;
+  }
+  .hero h1 {
+    font-size: 2.5rem;
+    color: #d63384;
+    font-family: "Comic Neue", cursive;
+  }
+  .hero p {
+    font-size: 1.2rem;
+    margin: 20px auto;
+    max-width: 700px;
+  }
+  .section-block {
+    background: #fff;
+    border-radius: 16px;
+    margin: 30px auto;
+    max-width: 900px;
+    padding: 40px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+  }
+  h2 {
+    text-align: center;
+    color: #ff5ca2;
+    margin-bottom: 20px;
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  ul li {
+    padding: 8px 0;
+  }
+  .event-frame {
+    border: 2px dashed #ffb6c1;
+    padding: 20px;
+    border-radius: 12px;
+    background: #fff0f6;
+  }
+  .about-me {
+    background-color: #e6f0ff;
+  }
+  .about-me h2 {
+    color: #004aad;
+  }
+  .tiles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  .tile {
+    background: #fff;
+    border-radius: 16px;
+    padding: 20px;
+    width: 280px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+  .tile img {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 15px;
+  }
+</style>
 </head>
 <body>
 <header class="site-header">
@@ -20,24 +98,22 @@
 </header>
 
 <main>
-  <!-- Hero / Welcome -->
+  <!-- Hero -->
   <section class="hero">
-    <div class="container">
-      <h1 class="cute-title">🌷 Tulip — Your Favorite Online Persona & YouTuber 🌷</h1>
-      <p class="lead">
-        Hey! I’m Tulip — your sweet, silly, and sometimes spicy online bestie.  
-        I stream Minecraft, chill on Twitch, create spicy fun on SextPanther,  
-        and bring good vibes everywhere I go. 💕
-      </p>
-      <div class="cta-row">
-        <a class="btn" href="#schedule">View Schedule</a>
-        <a class="btn ghost" href="#store">Visit Storefront</a>
-      </div>
+    <h1>🌷 Tulip — Your Favorite Online Persona & YouTuber 🌷</h1>
+    <p>
+      Hey! I’m Tulip — your sweet, silly, and sometimes spicy online bestie.  
+      I stream Minecraft, chill on Twitch, create spicy fun on SextPanther,  
+      and bring good vibes everywhere I go. 💕
+    </p>
+    <div class="cta-row">
+      <a class="btn" href="#schedule">View Schedule</a>
+      <a class="btn ghost" href="#store">Visit Storefront</a>
     </div>
   </section>
 
   <!-- Schedule -->
-  <section id="schedule" class="container schedule">
+  <section id="schedule" class="section-block">
     <h2>📅 My Weekly Schedule</h2>
     <ul>
       <li><strong>Monday:</strong> Spicy SextPanther chats — 9 PM to 1 AM</li>
@@ -51,9 +127,8 @@
   </section>
 
   <!-- Social Media Rates -->
-  <section class="container social-rates">
+  <section class="section-block">
     <h2>💸 Social Media Rates</h2>
-    <p>Want to connect deeper with me? Here are my socials & what you’ll get:</p>
     <ul>
       <li><strong>Twitter (X):</strong> Daily updates & teasers — Free</li>
       <li><strong>Instagram:</strong> Lifestyle, selfies, and sneak peeks — Free</li>
@@ -65,11 +140,11 @@
     </ul>
   </section>
 
-  <!-- Upcoming Fun Things -->
-  <section class="container upcoming">
-    <h2 style="color:hotpink;">🌸 Upcoming Fun Things in 2025 🌸</h2>
+  <!-- Upcoming Events -->
+  <section class="section-block">
+    <h2>🌸 Upcoming Fun Things in 2025 🌸</h2>
     <div class="event-frame">
-      <p><strong>October 2025:</strong> Spooky Costume Stream (Minecraft & SextPanther special!)</p>
+      <p><strong>October 2025:</strong> Spooky Costume Stream 🎃 (Minecraft & SextPanther special!)</p>
       <p><strong>December 2025:</strong> Holiday Giveaway Stream 🎁</p>
       <p><strong>February 2026:</strong> Valentine’s Day Photoset + Polaroid bundle 💌</p>
       <p><strong>Summer 2026:</strong> Big Minecraft event collab ☀️</p>
@@ -77,8 +152,8 @@
   </section>
 
   <!-- About Me -->
-  <section id="about" class="container about-me" style="background-color:#e6f0ff;padding:20px;border-radius:10px;">
-    <h2 style="color:blue;">💙 About Me 💙</h2>
+  <section id="about" class="section-block about-me">
+    <h2>💙 About Me 💙</h2>
     <p>
       Hi! I’m Tulip, your favorite online persona and a college student studying  
       <strong>Software Engineering</strong>. I balance coding projects with gaming,  
@@ -93,8 +168,8 @@
     </p>
   </section>
 
-  <!-- Storefront Preview -->
-  <section id="store" class="container storefront-preview">
+  <!-- Storefront -->
+  <section id="store" class="section-block">
     <h2>🛍️ Storefront Preview</h2>
     <div class="tiles">
       <article class="tile">
@@ -125,7 +200,5 @@
     </div>
   </div>
 </footer>
-
-<script src="site.js"></script>
 </body>
 </html>
