@@ -1,0 +1,80 @@
+:root{
+  --bg:#FAF8F5; /* cream */
+  --panel:#F6EFE8; /* light beige */
+  --accent:#D8C4AD; /* light brown */
+  --accent-2:#BFA78C;
+  --muted:#8C7B6B; /* brown */
+  --text:#2E2A28; /* dark text */
+  --white:#FFFFFF;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+
+.container{max-width:1100px;margin:0 auto;padding:2rem}
+
+.site-header{background:linear-gradient(0deg, rgba(255,255,255,0.6), rgba(255,255,255,0.6));backdrop-filter: blur(4px);border-bottom:1px solid rgba(0,0,0,0.04)}
+.header-inner{display:flex;align-items:center;justify-content:space-between;padding:1rem 0}
+.brand{font-weight:700;color:var(--muted);text-decoration:none;font-size:1.25rem}
+.nav a{margin-left:1rem;color:var(--muted);text-decoration:none;font-weight:600}
+.nav a:hover{color:var(--text)}
+
+.hero{padding:4rem 0;background:linear-gradient(180deg, var(--panel), transparent);border-bottom:1px solid rgba(0,0,0,0.03)}
+.hero h1{font-size:2rem;margin-bottom:.5rem;color:var(--text)}
+.lead{color:var(--muted);margin-bottom:1rem}
+
+.cta-row .btn{display:inline-block;padding:.6rem 1rem;border-radius:8px;background:var(--accent);color:var(--white);text-decoration:none;font-weight:600;margin-right:.5rem}
+.cta-row .btn.ghost{background:transparent;color:var(--muted);border:1px solid rgba(0,0,0,0.06)}
+
+.work-showcase h2, .storefront-preview h2{margin-top:1.25rem;margin-bottom:.5rem}
+.social-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-top:1rem}
+.social-card{display:flex;gap:.75rem;align-items:center;padding:1rem;border-radius:10px;background:var(--white);box-shadow:0 6px 18px rgba(18,18,18,0.03);text-decoration:none;color:var(--text)}
+.social-card .icon{width:48px;height:48px;border-radius:10px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--white)}
+.social-card small{display:block;color:var(--muted);font-size:.8rem}
+
+.card{padding:1.25rem;border-radius:12px;background:linear-gradient(180deg,var(--white),#fff);box-shadow:0 6px 18px rgba(18,18,18,0.03)}
+.about-blurb .card p{color:var(--muted)}
+
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:1rem}
+.tile{background:var(--white);padding:.75rem;border-radius:12px;box-shadow:0 6px 18px rgba(18,18,18,0.03);text-align:center}
+.tile img{width:100%;height:140px;object-fit:cover;border-radius:8px;margin-bottom:.5rem}
+.small-btn{display:inline-block;margin-top:.5rem;padding:.4rem .6rem;border-radius:8px;background:transparent;border:1px solid rgba(0,0,0,0.06);text-decoration:none;color:var(--muted)}
+
+.site-footer{padding:1rem 0;border-top:1px solid rgba(0,0,0,0.04);margin-top:2rem}
+.footer-inner{display:flex;justify-content:space-between;align-items:center}
+.footer-links a{margin-left:1rem;color:var(--muted);text-decoration:none; font-size:.9rem}
+
+/* Schedule chart styles */
+.schedule-wrapper{background:linear-gradient(180deg,var(--panel),transparent);padding:1rem;border-radius:12px;margin-top:1rem}
+.schedule-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem}
+.time-ruler{display:flex;gap:0.5rem;font-size:0.9rem;color:var(--muted);align-items:center}
+.chart{overflow:auto;padding-bottom:0.5rem}
+.chart-grid{min-width:960px} /* ensure horizontal room for 24 hours */
+.day-row{position:relative;display:flex;align-items:center;border-bottom:1px solid rgba(0,0,0,0.04);height:56px;background:transparent}
+.day-label{width:110px;padding-left:8px;font-weight:700;color:var(--muted)}
+.hours{flex:1;position:relative;height:56px}
+.hour-mark{position:absolute;top:0;bottom:0;opacity:0.06;border-left:1px solid #cfc4b6}
+.hour-labels{display:flex;justify-content:space-between;font-size:0.8rem;color:var(--muted);padding:6px 4px}
+.event{position:absolute;height:34px;top:11px;border-radius:8px;padding:6px 8px;color:var(--white);font-weight:700;box-shadow:0 6px 18px rgba(18,18,18,0.06)}
+.event-night{background:linear-gradient(90deg,var(--accent),var(--accent-2))}
+.event-morning{background:linear-gradient(90deg,#A99A80,#CBB89F)}
+
+/* legend */
+.legend{display:flex;gap:1rem;align-items:center;font-size:0.9rem;color:var(--muted);margin-top:0.6rem}
+.legend .key{display:flex;gap:0.5rem;align-items:center}
+.key .swatch{width:18px;height:14px;border-radius:4px;display:inline-block}
+
+/* responsive */
+@media(max-width:720px){
+  .header-inner{flex-direction:column;align-items:flex-start}
+  .nav{margin-top:.5rem}
+  .hero h1{font-size:1.5rem}
+  .day-label{width:80px}
+}

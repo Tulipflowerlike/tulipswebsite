@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Schedule — TulipFlowerLike</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="/">TulipFlowerLike</a>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="schedule.html">Schedule</a>
+      <a href="about.html">About</a>
+      <a href="store.html">Storefront</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container" style="padding-top:2rem;padding-bottom:3rem">
+  <article class="card">
+    <h1>Weekly Schedule</h1>
+    <p>This chart shows the weekly availability Monday → Saturday. Nightly shows on <strong>Sex Panther</strong> from <strong>21:00 — 03:00</strong>. Additional morning sessions on <strong>Mon, Wed, Fri</strong> from <strong>05:00 — 10:00</strong>.</p>
+
+    <div class="schedule-wrapper" id="scheduleChart">
+      <div class="schedule-top">
+        <div class="time-ruler">
+          <div style="font-weight:700">Time (24h)</div>
+        </div>
+        <div class="legend" aria-hidden="true">
+          <div class="key"><span class="swatch" style="background:linear-gradient(90deg,var(--accent),var(--accent-2))"></span> Sex Panther (21:00–03:00)</div>
+          <div class="key"><span class="swatch" style="background:linear-gradient(90deg,#A99A80,#CBB89F)"></span> Morning Online (05:00–10:00)</div>
+        </div>
+      </div>
+
+      <div class="chart">
+        <div class="chart-grid" id="chartGrid">
+          <!-- header with hour labels -->
+          <div style="display:flex;align-items:center">
+            <div style="width:110px"></div>
+            <div style="flex:1;padding:4px">
+              <div class="hour-labels" id="hourLabels"></div>
+            </div>
+          </div>
+
+          <!-- day rows will be injected here -->
+          <div id="daysContainer"></div>
+        </div>
+      </div>
+    </div>
+
+    <p style="margin-top:0.8rem;color:var(--muted);font-size:0.95rem">Tip: open on a desktop or wide mobile to see the full 24-hour timeline.</p>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div>© 2025 TulipFlowerLike</div>
+    <div class="footer-links">
+      <a href="#">Privacy</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Build schedule chart for Mon-Sat with rules:
+// - Sex Panther nightly: 21:00 -> 03:00 (for nights Mon → Sat)
+// - Morning sessions on Mon, Wed, Fri: 05:00 -> 10:00
+(function(){
+  const days = ['Mon','Tue','Wed','Thu','Fri','Sat'];
+  const daysContainer = document.getElementById('daysContainer');
+  const hourLabels = document.getElementById('hourLabels');
+
+  // create hour labels (0..24 every 3 hours)
+  const hours = 24;
+  const labelHours = [0,3,6,9,12,15,18,21,24];
+  labelHours.forEach((h, idx)=>{
+    const el = document.createElement('div');
+    el.textContent = (h===24)?'24':String(h).padStart(2,'0') + ':00';
+    el.style.flex = (idx === labelHours.length-1)?'0 0 auto':'1';
+    hourLabels.appendChild(el);
+  });
+
+  function hourToPercent(hourFloat){
+    return (hourFloat / hours) * 100;
+  }
+
+  function addEventToDay(dayEl, startH, endH, label, cls){
+    // if endH < startH => crosses midnight, split into two segments for the day view:
+    if(endH <= startH){
+      // segment 1: startH -> 24 on this day
+      addEventToDay(dayEl, startH, 24, label, cls);
+      // segment 2: 0 -> endH on NEXT day (handled outside when night sessions are created)
+      return;
+    }
+    const hoursWidth = 100; // percent base for 24
+    const left = hourToPercent(startH);
+    const width = hourToPercent(endH - startH);
+    const ev = document.createElement('div');
+    ev.className = 'event ' + cls;
+    ev.style.left = left + '%';
+    ev.style.width = width + '%';
+    ev.innerText = label;
+    dayEl.querySelector('.hours').appendChild(ev);
+  }
+
+  // Create rows for each day
+  days.forEach((d, idx) => {
+    const row = document.createElement('div');
+    row.className = 'day-row';
+    row.innerHTML = `<div class="day-label">${d}</div><div class="hours" style="--idx:${idx}"></div>`;
+    // add hour marks (24 columns) as thin lines
+    const hoursDiv = row.querySelector('.hours');
+    for(let h=0; h<24; h++){
+      const mark = document.createElement('div');
+      mark.className = 'hour-mark';
+      mark.style.left = (h*(100/24)) + '%';
+      mark.style.width = (100/24) + '%';
+      hoursDiv.appendChild(mark);
+    }
+    daysContainer.appendChild(row);
+  });
+
+  // Now add sessions:
+  // Sex Panther nightly on nights Mon-Sat: for night starting on day i (Mon..Sat):
+  days.forEach((d, i) => {
+    // add 21:00 - 24:00 on that day
+    const row = document.getElementById('daysContainer').children[i];
+    addEventToDay(row, 21, 24, 'Sex Panther', 'event-night');
+    // add 00:00 - 03:00 on NEXT day if next day exists in our displayed days
+    const nextIndex = i + 1;
+    if(nextIndex < days.length){
+      const nextRow = document.getElementById('daysContainer').children[nextIndex];
+      addEventToDay(nextRow, 0, 3, 'Sex Panther', 'event-night');
+    }
+  });
+
+  // Morning sessions Mon/Wed/Fri 05:00 - 10:00
+  const morningDays = {'Mon':true,'Wed':true,'Fri':true};
+  days.forEach((d,i)=>{
+    if(morningDays[d]){
+      const row = document.getElementById('daysContainer').children[i];
+      addEventToDay(row, 5, 10, 'Online (AM)', 'event-morning');
+    }
+  });
+
+})();
+</script>
+
+</body>
+</html>
